@@ -1,0 +1,35 @@
+{
+  "name": "mongobatch-js",
+  "version": "0.1.2",
+  "description": "process mongodb collections in batches",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andrasq/mongobatch-js"
+  },
+  "main": "index.js",
+  "author": {
+    "name": "Andras",
+    "url": "http://github.com/andrasq"
+  },
+  "engines": {
+    "node": ">=0.0.0"
+  },
+  "scripts": {
+    "test": "nodeunit"
+  },
+  "keywords": [
+    "Andras",
+    "mongodb",
+    "collection",
+    "fast",
+    "quick",
+    "access"
+  ],
+  "dependencies": {
+    "mongodb":"~1"
+  },
+  "devDependencies": {
+    "nodeunit": "*"
+  }
+}
