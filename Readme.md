@@ -42,6 +42,7 @@ Supports document indexes that are numbers, strings and BSON ObjectIds.
         });
 
 Options
+
         batchSize: 100          - how many documents to return at a time (default 100)
         selectRows: {}          - which documents to return, find(selectRows) (default all)
         selectColumns: {}       - which fields to return, find({}, selectColumns) (default all)
