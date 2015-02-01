@@ -17,6 +17,7 @@ var collection = null;
 
 var i;
 for (i=1; i<=dataCount; i++) {
+    // rotate ids among numbers, strings, and bson objects
     var id = ((i % 3 === 1) ? i : (i % 3 === 2) ? (""+i) : undefined);
     data.push({_id: id, i:i, f:i+.01, s:""+i});
 }

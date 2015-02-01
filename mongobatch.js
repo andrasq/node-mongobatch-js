@@ -26,7 +26,7 @@ function batchMongoCollection( collection, options, arrayFunc, callback ) {
     var batchSize = options.batchSize || 100;
     var sortOrder = {_id: 1};
 
-    function readLoop(lastId, offset, cb) {
+    function readLoop( lastId, offset, cb ) {
         if (lastId === null) lastId = lowestNumericId;
         var select = {_id: {$gt: lastId}};
         if (Object.keys(selectRows).length > 0) select = {$and: [select, selectRows]};
@@ -41,7 +41,7 @@ function batchMongoCollection( collection, options, arrayFunc, callback ) {
             if (array.length > 0) arrayFunc(array, offset, nextBatch);
             else nextBatch();
 
-            function nextBatch(err) {
+            function nextBatch( err ) {
                 if (err) return cb(err, offset);
                 offset += array.length;
                 if (array.length >= batchSize) {

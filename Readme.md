@@ -1,7 +1,7 @@
 mongobatch
 ==========
 
-Process MongoDB collection contents in convenient batches.
+Process large MongoDB collections in convenient smaller batches.
 
 
 ## Installation
@@ -35,10 +35,10 @@ Options:
 
 - `batchSize` : how many documents to return at a time (default 100)
 - `selectRows` : which documents to return, specified as a mongodb `find`
-  criterion object (default all).  This search criterion is applied in
-  combination with an _id range test; check that the collection has the right
-  indexes for it.
-- `selectColumns` : which fields to return from the documents (default all).
+  criterion object (default `{}`, all).  This search criterion is applied in
+  combination with an _id range test.  For acceptable performance, check that
+  the collection indexes support an `$and` query on both _id and `selectRows`.
+- `selectColumns` : which fields to return from the documents (default `{}` all).
   This is passed as the second argument to `collection.find({}, selectColumns)`
   _id is always returned.
 
