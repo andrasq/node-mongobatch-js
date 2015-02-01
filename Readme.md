@@ -19,26 +19,26 @@ Supports document indexes that are numbers, strings and BSON ObjectIds, even
 within the same collection.  Documents are traversed in ascending _id order
 starting with numeric _ids, then strings, and finally objects.
 
-`collection` - mongodb collection object to iterate over
-<br>
-`options` -
-  `batchSize` : how many documents to return at a time (default 100)
-  `selectRows` : which documents to return, specified as a mongodb `find`
+- `collection` - mongodb collection object to iterate over
+- `options` - adjustments to run-time behavior
+- `filter` - function to process the documents, `filer(documents, offset, cb)`.
+  Documents is a non-empty array of objects read from the collection.
+  Offset is the number of documents already passed to filter (ie, the skip
+  distance of `documents[0]` from the beginning of the collection, counted
+  in ascending _id order).  Cb is the callback when processing is finished.
+- `whenDone` - called on error or when all documents have been filtered.
+  Called with the count of documents found, `whenDone(err, documentCount)`.
+
+Options:
+
+- `batchSize` : how many documents to return at a time (default 100)
+- `selectRows` : which documents to return, specified as a mongodb `find`
   criterion object (default all).  This search criterion is applied in
   combination with an _id range test; check that the collection has the right
   indexes for it.
-  `selectColumns` : which fields to return from the documents (default all).
+- `selectColumns` : which fields to return from the documents (default all).
   This is passed as the second argument to `collection.find({}, selectColumns)`
   _id is always returned.
-<br>
-`filter` - function to process the documents, `filer(documents, offset, cb)`.
-    Documents is a non-empty array of objects read from the collection.
-    Offset is the number of documents already passed to filter (ie, the skip
-    distance of `documents[0]` from the beginning of the collection, counted
-    in ascending _id order).  Cb is the callback when processing is finished.
-<br>
-`whenDone` - callback when all documents have been processed with filter,
-    called with `whenDone(err, documentCount)`.
 
 
 ## Example
