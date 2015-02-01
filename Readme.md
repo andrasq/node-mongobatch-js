@@ -3,10 +3,12 @@ mongobatch
 
 Process MongoDB collection contents in convenient batches.
 
+
 ## Installation
 
         npm install mongobatch-js
         npm test mongobatch-js
+
 
 ## Calls
 
@@ -14,7 +16,7 @@ Process MongoDB collection contents in convenient batches.
 
 Read batches documents from the mongodb collection and pass them to `filter`.
 Supports document indexes that are numbers, strings and BSON ObjectIds, even
-within the same collection.
+within the same collection.  Documents are scanned in ascending _id order.
 
 `collection` - mongodb collection object to iterate over
 <br>
@@ -22,21 +24,25 @@ within the same collection.
 <br>
   `batchSize` : 100 - how many documents to return at a time (default 100)
 <br>
-  `selectRows` : {} - which documents to return, find(selectRows) (default all)
+  `selectRows` : {} - which documents to return, find(selectRows) (default all).
+  This is an additional search criterion applied in combination with an _id
+  range test; check that the collection has the right indexes for it.
 <br>
-  `selectColumns` : {} - which fields to return, find({}, selectColumns) (default all)
+  `selectColumns` : {} - which fields to return from the documents (default all).
+  This is passed as the second argument to `collection.find({}, selectColumns)`
+  _id is always returned.
 <br>
 `filter` - function to process the documents, `filer(documents, offset, cb)`.
     Documents is a non-empty array of objects read from the collection.
-    Offset is the number of documents already passed to filter (ie, it is the
-    `skip` distance of the `documents[0]` from the beginning of the
-    collection, counted in ascending _id order).  Cb is the callback when
-    processing is finished.
+    Offset is the number of documents already passed to filter (ie, the skip
+    distance of `documents[0]` from the beginning of the collection, counted
+    in ascending _id order).  Cb is the callback when processing is finished.
 <br>
 `whenDone` - callback when all documents have been processed with filter,
     called with `whenDone(err, documentCount)`.
 
-### Example
+
+## Example
 
         var assert = require('assert');
         var mongoClient = require('mongodb').MongoClient;
@@ -54,8 +60,10 @@ within the same collection.
 
                         // always called with an array
                         assert(Array.isArray(documents))
+
                         // offset is the number of documents returned prior to this batch
                         assert(documentCount === offset);
+
                         // does not return empty batches
                         assert(documents.length > 0);
 
@@ -63,6 +71,7 @@ within the same collection.
                         cb();
                     },
                     function whenDone(err, rowcount) {
+                        // reports the number of documents found
                         assert(rowcount === documentCount);
                         console.log("Done.");
                         db.close();
