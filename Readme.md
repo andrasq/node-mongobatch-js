@@ -85,3 +85,4 @@ Options:
 ## Todo
 
 - accept a sortOrder option to use instead of _id
+- support raw BSON results
