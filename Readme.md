@@ -16,18 +16,16 @@ Process MongoDB collection contents in convenient batches.
 
 Read batches documents from the mongodb collection and pass them to `filter`.
 Supports document indexes that are numbers, strings and BSON ObjectIds, even
-within the same collection.  Documents are scanned in ascending _id order.
+within the same collection.  Documents are traversed in ascending _id order
+starting with numeric _ids, then strings, and finally objects.
 
 `collection` - mongodb collection object to iterate over
 <br>
 `options` -
-<br>
   `batchSize` : 100 - how many documents to return at a time (default 100)
-<br>
   `selectRows` : {} - which documents to return, find(selectRows) (default all).
   This is an additional search criterion applied in combination with an _id
   range test; check that the collection has the right indexes for it.
-<br>
   `selectColumns` : {} - which fields to return from the documents (default all).
   This is passed as the second argument to `collection.find({}, selectColumns)`
   _id is always returned.
@@ -79,3 +77,8 @@ within the same collection.  Documents are scanned in ascending _id order.
                 );
             });
         });
+
+
+## Todo
+
+- accept a sortOrder option to use instead of _id
