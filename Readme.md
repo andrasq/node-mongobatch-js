@@ -25,7 +25,9 @@ starting with numeric _ids, then strings, and finally objects.
   Documents is a non-empty array of objects read from the collection.
   Offset is the number of documents already passed to filter (ie, the skip
   distance of `documents[0]` from the beginning of the collection, counted
-  in ascending _id order).  Cb is the callback when processing is finished.
+  in ascending _id order).  Cb is the callback to signal that processing is
+  finished for this batch; errors passed to cb will interrupt the iteration
+  and will be returned with whenDone.
 - `whenDone` - called on error or when all documents have been filtered.
   Called with the count of documents found, `whenDone(err, documentCount)`.
 
