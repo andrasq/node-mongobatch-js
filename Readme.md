@@ -20,9 +20,11 @@ within the same collection.
 <br>
 `options` -
 <br>
-- `batchSize` : 100 - how many documents to return at a time (default 100)
-- `selectRows` : {} - which documents to return, find(selectRows) (default all)
-- `selectColumns` : {} - which fields to return, find({}, selectColumns) (default all)
+  `batchSize` : 100 - how many documents to return at a time (default 100)
+<br>
+  `selectRows` : {} - which documents to return, find(selectRows) (default all)
+<br>
+  `selectColumns` : {} - which fields to return, find({}, selectColumns) (default all)
 <br>
 `filter` - function to process the documents, `filer(documents, offset, cb)`.
     Documents is a non-empty array of objects read from the collection.
