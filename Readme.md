@@ -6,6 +6,7 @@ Process MongoDB collection contents in convenient batches.
 ## Installation
 
         npm install mongobatch-js
+        npm test mongobatch-js
 
 ## Calls
 
@@ -16,20 +17,20 @@ Supports document indexes that are numbers, strings and BSON ObjectIds, even
 within the same collection.
 
 `collection` - mongodb collection object to iterate over
-
+<br>
 `options` -
-
-- `batchSize1` : 100 - how many documents to return at a time (default 100)
+<br>
+- `batchSize` : 100 - how many documents to return at a time (default 100)
 - `selectRows` : {} - which documents to return, find(selectRows) (default all)
 - `selectColumns` : {} - which fields to return, find({}, selectColumns) (default all)
-
+<br>
 `filter` - function to process the documents, `filer(documents, offset, cb)`.
     Documents is a non-empty array of objects read from the collection.
     Offset is the number of documents already passed to filter (ie, it is the
     `skip` distance of the `documents[0]` from the beginning of the
     collection, counted in ascending _id order).  Cb is the callback when
     processing is finished.
-
+<br>
 `whenDone` - callback when all documents have been processed with filter,
     called with `whenDone(err, documentCount)`.
 
