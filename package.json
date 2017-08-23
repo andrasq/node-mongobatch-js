@@ -1,6 +1,6 @@
 {
   "name": "mongobatch-js",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "process mongodb collections in batches",
   "license": "Apache-2.0",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "url": "git://github.com/andrasq/node-mongobatch-js"
   },
   "engines": {
-    "node": "*"
+    "node": ">=0.10"
   },
   "scripts": {
     "test": "nodeunit"
@@ -27,9 +27,14 @@
     "access"
   ],
   "dependencies": {
-    "mongodb":"*"
   },
   "devDependencies": {
-    "nodeunit": "*"
+    "mongodb": "*",
+    "qnit": "0.18.0"
+  },
+  "scripts": {
+    "test": "qnit test",
+    "coverage": "nyc --include mongobatch.js --reporter lcov --reporter text npm test",
+    "clean": "rm -rf .nyc_output coverage"
   }
 }
