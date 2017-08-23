@@ -92,3 +92,5 @@ Options:
 
 - accept a sortOrder option to use instead of _id
 - support raw BSON results
+- accept the standard mongo options `query`, `fields`, `sort`
+- allow a delay between batches

@@ -28,16 +28,27 @@ module.exports = {
             var collection = { find: function() { arguments[arguments.length - 1](null, cursor) } };
 
             var batchSize = options.batchSize || 100;
-            t.expect(3 + Math.ceil(items.length / batchSize) * 4);
+            t.expect(3 + Math.ceil(items.length / batchSize) * 5);
 
             var expectOffset = 0;
             batchMongoCollection(collection, options,
                 function(batch, offset, cb) {
-                    t.ok(batch);
+                    // always called with array
+                    t.ok(Array.isArray(batch));
+
+                    // no empty batches
+                    t.ok(batch.length > 0);
+
+                    // batchSize items unless not that many
                     if (offset + batchSize <= items.length) t.equal(batch.length, batchSize);
                     else t.equal(batch.length, items.length - offset);
+
+                    // offset is starting index of current batch
                     t.equal(offset, expectOffset);
-                    t.deepEqual(batch, items.slice(offset, offset + batch.length));
+
+                    // the batch should be the correct subset of the query results
+                    t.deepStrictEqual(batch, items.slice(offset, offset + batch.length));
+
                     expectOffset += batch.length;
                     cb();
                 },
