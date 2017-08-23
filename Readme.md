@@ -1,7 +1,9 @@
-mongobatch
-==========
+mongobatch-js
+=============
 
 Process large MongoDB collections in convenient smaller batches.
+
+Calls the filter function on batches of documents read from the collection.
 
 
 ## Installation
@@ -47,7 +49,7 @@ Options:
 
         var assert = require('assert');
         var mongoClient = require('mongodb').MongoClient;
-        var batchMongoCollection = require('mongobatch').batchMongoCollection;
+        var batchMongoCollection = require('mongobatch-js').batchMongoCollection;
 
         db = mongoClient.connect("mongodb://localhost/test", function(err, db) {
             db.collection('collectiontest', function(err, collection) {
