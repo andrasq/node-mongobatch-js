@@ -1,6 +1,10 @@
 mongobatch-js
 =============
 
+[![Build Status](https://api.travis-ci.org/andrasq/node-mongobatch-js.svg?branch=master)](https://travis-ci.org/andrasq/node-mongobatch-js?branch=master)
+[![Coverage Status](https://codecov.io/github/andrasq/node-mongobatch-js/coverage.svg?branch=master)](https://codecov.io/github/andrasq/node-mongobatch-js?branch=master)
+
+
 Process large MongoDB collections in convenient smaller batches.
 
 Calls the filter function on batches of documents read from the collection.
